@@ -34,7 +34,7 @@ public class playerListener implements Listener {
 	}
 	
 	@EventHandler
-	public void onPlayerChat(PlayerChatEvent event) {
+	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		if (pexchat.permissions == null) return;
 		if (event.isCancelled()) return;
 		Player p = event.getPlayer();
