@@ -172,6 +172,7 @@ pexchat.reload - Allow reloading the PExChat config
   - Added PermissionsEx support
   - Added group tracks for ordering multiple groups in chat formatting
   - Added group aliases: enables changing the name of a group in the chat formatting
+  - Changed "/ichat relaod" command to "/pexchat reload"
 
 =============
 iChat Changes
