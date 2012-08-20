@@ -2,7 +2,10 @@ package com.Sleelin.PExChat;
 
 /**
  * PExChat - A chat formatting plugin for Bukkit.
- * Author: Sleelin 
+ *  
+ * Copyright (C) 2012 Sleelin (sleelin@gmail.com)
+ * Copyright (C) 2011 Steven "Drakia" Scott <Drakia@Gmail.com>
+ * Copyright (C) 2011 MiracleM4n <https://github.com/MiracleM4n/>
  * 
  * License:
  * This program is free software: you can redistribute it and/or modify
@@ -102,7 +105,6 @@ public class PExChat extends JavaPlugin {
 		loadConfig();
 		
 		// Register events
-		pm.registerEvents(pListener, this);
 		pm.registerEvents(pListener, this);
 		
 		// Setup external interface

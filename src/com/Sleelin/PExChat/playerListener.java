@@ -2,8 +2,12 @@ package com.Sleelin.PExChat;
 
 /**
  * PExChat - A chat formatting plugin for Bukkit.
+ *  
+ * Copyright (C) 2012 Sleelin (sleelin@gmail.com)
  * Copyright (C) 2011 Steven "Drakia" Scott <Drakia@Gmail.com>
+ * Copyright (C) 2011 MiracleM4n <https://github.com/MiracleM4n/>
  * 
+ * License:
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -21,19 +25,19 @@ package com.Sleelin.PExChat;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class playerListener implements Listener {
-	// Use this for permissions checking.
 	PExChat pexchat;
 	
-	playerListener(PExChat ichat) {
-		this.pexchat = ichat;
+	playerListener(PExChat pexchat) {
+		this.pexchat = pexchat;
 	}
 	
-	@EventHandler
+	@EventHandler(priority=EventPriority.HIGHEST)
 	public void onPlayerChat(PlayerChatEvent event) {
 		if (pexchat.permissions == null) return;
 		if (event.isCancelled()) return;
@@ -43,8 +47,7 @@ public class playerListener implements Listener {
 		event.setFormat( pexchat.parseChat(p, msg) + " " );
 	}
 	
-	// Use CommandPreprocess because that's what Justin said.
-	@EventHandler
+	@EventHandler(priority=EventPriority.HIGHEST)
 	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
 		if (pexchat.permissions == null) return;
 		if (event.isCancelled()) return;
