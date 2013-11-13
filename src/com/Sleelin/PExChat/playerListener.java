@@ -27,42 +27,42 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class playerListener implements Listener {
-	PExChat pexchat;
-	
-	playerListener(PExChat pexchat) {
-		this.pexchat = pexchat;
-	}
-	
-	@EventHandler(priority=EventPriority.HIGHEST)
-	public void onPlayerChat(PlayerChatEvent event) {
-		if (pexchat.permissions == null) return;
-		if (event.isCancelled()) return;
-		Player p = event.getPlayer();
-		String msg = event.getMessage();
-		
-		event.setFormat( pexchat.parseChat(p, msg) + " " );
-	}
-	
-	@EventHandler(priority=EventPriority.HIGHEST)
-	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
-		if (pexchat.permissions == null) return;
-		if (event.isCancelled()) return;
-		Player p = event.getPlayer();
-		String message = event.getMessage();
-		
-		if (message.toLowerCase().startsWith("/me ")) {
-			String s = message.substring(message.indexOf(" ")).trim();
-			String formatted = pexchat.parseChat(p, s, pexchat.meFormat);
-			// Call custom event
-			PExChatMeEvent meEvent = new PExChatMeEvent(p, formatted);
-			Bukkit.getServer().getPluginManager().callEvent(meEvent);
-			Bukkit.getServer().broadcastMessage(formatted);
+    PExChat pexchat;
 
-			event.setCancelled(true);
-		}
-	}
+    playerListener(PExChat pexchat) {
+        this.pexchat = pexchat;
+    }
+
+    @EventHandler(priority=EventPriority.HIGHEST)
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
+        if (pexchat.permissions == null) return;
+        if (event.isCancelled()) return;
+        Player p = event.getPlayer();
+        String msg = event.getMessage();
+
+        event.setFormat( pexchat.parseChat(p, msg) + " " );
+    }
+
+    @EventHandler(priority=EventPriority.HIGHEST)
+    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
+        if (pexchat.permissions == null) return;
+        if (event.isCancelled()) return;
+        Player p = event.getPlayer();
+        String message = event.getMessage();
+
+        if (message.toLowerCase().startsWith("/me ")) {
+            String s = message.substring(message.indexOf(" ")).trim();
+            String formatted = pexchat.parseChat(p, s, pexchat.meFormat);
+            // Call custom event
+            PExChatMeEvent meEvent = new PExChatMeEvent(p, formatted);
+            Bukkit.getServer().getPluginManager().callEvent(meEvent);
+            Bukkit.getServer().broadcastMessage(formatted);
+
+            event.setCancelled(true);
+        }
+    }
 }
